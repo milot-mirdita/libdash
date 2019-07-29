@@ -291,13 +291,29 @@ read_profile(const char *name)
  * Read a file containing shell functions.
  */
 
-void
+int
 readcmdfile(char *name)
 {
 	setinputfile(name, INPUT_PUSH_FILE);
-	cmdloop(0);
+	int status = cmdloop(0);
 	popfile();
+	return status;
 }
+
+
+/*
+ * Read a string containing shell functions.
+ */
+
+int
+readcmdstring(char *string)
+{
+	setinputstring(string);
+	int status = cmdloop(0);
+	popfile();
+	return status;
+}
+
 
 
 
